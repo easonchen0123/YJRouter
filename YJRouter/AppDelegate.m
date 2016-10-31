@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "YJRouter.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,9 +18,38 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [self initRouter];
+    
+    // 主页面
+    ViewController *vc = [[ViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
+    [YJRouter sharedInstance].rootViewController = self.window.rootViewController;
+
     return YES;
 }
+
+- (void)initRouter {
+    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"YJRouterConfig" ofType:@"geojson"];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSError *errorJson;
+    NSDictionary *itemDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&errorJson];
+    if (errorJson != nil) {
+        return;
+    }
+    
+//    itemDictionary = [Common loadJsonFromFile:@"YJRouterConfig"];
+    NSArray *array = [itemDictionary objectForKey:@"data"];
+    [YJRouter registerURLPatternWithArray:array];
+    [YJRouter sharedInstance].navigationClassName = @"UINavigationController";
+    [YJRouter sharedInstance].appPrefixName = @"app";
+    
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
