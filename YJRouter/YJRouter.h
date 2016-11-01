@@ -6,7 +6,7 @@
 //  Copyright © 2016年 easonchen. All rights reserved.
 //
 
-// V 1.0.0          2016.10.31          by ChenYijun
+// v 1.0.0          2016.10.31          by ChenYijun
 //
 // 如果要弹出样式，url带上?showtype=present
 
