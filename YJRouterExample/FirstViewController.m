@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "YJRouter.h"
 
 @interface FirstViewController ()
 
@@ -18,6 +19,15 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor blueColor]];
+    
+    
+    NSDictionary *dic = [YJRouter extractParam:@"first"];
+    if (dic != nil) {
+        NSString *ID = [dic objectForKey:@"id"];
+        NSString *desc = [dic objectForKey:@"desc"];
+        NSLog(@"id: %@", ID);
+        NSLog(@"desc: %@", desc);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

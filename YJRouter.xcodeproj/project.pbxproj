@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDC5815D1DC771010025AF6A /* YJRouterConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC5815C1DC771010025AF6A /* YJRouterConfig.plist */; };
 		CDED3CE61DC744CF009AAD34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CD71DC744CF009AAD34 /* AppDelegate.m */; };
 		CDED3CE71DC744CF009AAD34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD81DC744CF009AAD34 /* Assets.xcassets */; };
 		CDED3CE81DC744CF009AAD34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD91DC744CF009AAD34 /* LaunchScreen.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		CD3B7CA31DC73283005CC537 /* YJRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDC5815C1DC771010025AF6A /* YJRouterConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YJRouterConfig.plist; sourceTree = "<group>"; };
 		CDED3CD61DC744CF009AAD34 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CDED3CD71DC744CF009AAD34 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CDED3CD81DC744CF009AAD34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,15 +75,16 @@
 				CDED3CD71DC744CF009AAD34 /* AppDelegate.m */,
 				CDED3CD81DC744CF009AAD34 /* Assets.xcassets */,
 				CDED3CD91DC744CF009AAD34 /* LaunchScreen.storyboard */,
-				CDED3CDB1DC744CF009AAD34 /* FirstViewController.h */,
-				CDED3CDC1DC744CF009AAD34 /* FirstViewController.m */,
 				CDED3CDD1DC744CF009AAD34 /* Info.plist */,
 				CDED3CDE1DC744CF009AAD34 /* main.m */,
-				CDED3CDF1DC744CF009AAD34 /* SecondViewController.h */,
-				CDED3CE01DC744CF009AAD34 /* SecondViewController.m */,
 				CDED3CE11DC744CF009AAD34 /* ViewController.h */,
 				CDED3CE21DC744CF009AAD34 /* ViewController.m */,
+				CDED3CDB1DC744CF009AAD34 /* FirstViewController.h */,
+				CDED3CDC1DC744CF009AAD34 /* FirstViewController.m */,
+				CDED3CDF1DC744CF009AAD34 /* SecondViewController.h */,
+				CDED3CE01DC744CF009AAD34 /* SecondViewController.m */,
 				CDED3CE51DC744CF009AAD34 /* YJRouterConfig.geojson */,
+				CDC5815C1DC771010025AF6A /* YJRouterConfig.plist */,
 			);
 			path = YJRouterExample;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				CDED3CE81DC744CF009AAD34 /* LaunchScreen.storyboard in Resources */,
 				CDED3CEA1DC744CF009AAD34 /* Info.plist in Resources */,
 				CDED3CEF1DC744CF009AAD34 /* YJRouterConfig.geojson in Resources */,
+				CDC5815D1DC771010025AF6A /* YJRouterConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

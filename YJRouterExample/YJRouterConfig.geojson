@@ -2,11 +2,11 @@
     "data": [
              {
              "controller": "FirstViewController",
-             "url_pattern": "app://first",
+             "url_pattern": "app://first/:id/:desc",
              },
              {
              "controller": "SecondViewController",
-             "url_pattern": "app://second",
+             "url_pattern": "app://second/:id/:desc",
              }
              ]
 }

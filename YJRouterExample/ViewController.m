@@ -45,9 +45,12 @@
 #pragma mark - Actions
 - (IBAction)onTouchUpInside:(id)sender {
     if (sender == self.firstButton) {
-        [YJRouter openURL:@"app://first"];
+        [YJRouter openURL:@"app://first/404/desc?url=aaaa&url2=12312332"];
     } else if (sender == self.secondButton) {
-        [YJRouter openURL:@"app://second/?showtype=present"];
+        
+        NSArray *array = @[@"1", @"2", @"3"];
+        NSDictionary *dic = @{ @"userinfo" : @"testUser" };
+        [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic];
     }
 }
 

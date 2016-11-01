@@ -38,6 +38,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.appPrefixName = @"app";
         self.navigationClassName = @"UINavigationController";
     }
     return self;
@@ -65,7 +66,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 }
 
 #pragma mark - Private
-- (NSArray*)pathComponentsFromURL:(NSString*)URL {
+- (NSArray *)pathComponentsFromURL:(NSString*)URL {
     NSMutableArray *pathComponents = [NSMutableArray array];
     if ([URL rangeOfString:@"://"].location != NSNotFound) {
         NSArray *pathSegments = [URL componentsSeparatedByString:@"://"];
@@ -114,14 +115,11 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 + (UIViewController *)getCurrentVC {
     UIViewController *result = nil;
     
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
+        for(UIWindow *tmpWin in windows) {
+            if (tmpWin.windowLevel == UIWindowLevelNormal) {
                 window = tmpWin;
                 break;
             }
@@ -143,10 +141,10 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     NSArray *pathComponents = [self pathComponentsFromURL:URLPattern];
     
     NSInteger index = 0;
-    NSMutableDictionary* subRoutes = self.routes;
+    NSMutableDictionary *subRoutes = self.routes;
     
     while (index < pathComponents.count) {
-        NSString* pathComponent = pathComponents[index];
+        NSString *pathComponent = pathComponents[index];
         if (![subRoutes objectForKey:pathComponent]) {
             subRoutes[pathComponent] = [[NSMutableDictionary alloc] init];
         }
@@ -158,23 +156,23 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 
 #pragma mark - Utils
 - (NSMutableDictionary *)extractParametersFromURL:(NSString *)url {
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
     parameters[YJRouterParameterURL] = url;
     
-    NSMutableDictionary* subRoutes = self.routes;
+    NSMutableDictionary *subRoutes = self.routes;
     NSArray* pathComponents = [self pathComponentsFromURL:url];
     
     // borrowed from HHRouter(https://github.com/Huohua/HHRouter)
-    for (NSString* pathComponent in pathComponents) {
+    for (NSString *pathComponent in pathComponents) {
         BOOL found = NO;
         
         // 对 key 进行排序，这样可以把 ~ 放到最后
-        NSArray *subRoutesKeys =[subRoutes.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        NSArray *subRoutesKeys = [subRoutes.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
             return [obj1 compare:obj2];
         }];
         
-        for (NSString* key in subRoutesKeys) {
+        for (NSString *key in subRoutesKeys) {
             if ([key isEqualToString:pathComponent] || [key isEqualToString:MGJ_ROUTER_WILDCARD_CHARACTER]) {
                 found = YES;
                 subRoutes = subRoutes[key];
@@ -206,15 +204,15 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     }
     
     // Extract Params From Query.
-    NSArray* pathInfo = [url componentsSeparatedByString:@"?"];
+    NSArray *pathInfo = [url componentsSeparatedByString:@"?"];
     if (pathInfo.count > 1) {
-        NSString* parametersString = [pathInfo objectAtIndex:1];
-        NSArray* paramStringArr = [parametersString componentsSeparatedByString:@"&"];
-        for (NSString* paramString in paramStringArr) {
-            NSArray* paramArr = [paramString componentsSeparatedByString:@"="];
+        NSString *parametersString = [pathInfo objectAtIndex:1];
+        NSArray *paramStringArr = [parametersString componentsSeparatedByString:@"&"];
+        for (NSString *paramString in paramStringArr) {
+            NSArray *paramArr = [paramString componentsSeparatedByString:@"="];
             if (paramArr.count > 1) {
-                NSString* key = [paramArr objectAtIndex:0];
-                NSString* value = [paramArr objectAtIndex:1];
+                NSString *key = [paramArr objectAtIndex:0];
+                NSString *value = [paramArr objectAtIndex:1];
                 parameters[key] = value;
             }
         }
@@ -332,6 +330,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     YJRouter *router = [self sharedInstance];
     
     NSDictionary *dic = [router.parameters objectForKey:key];
+    [router.parameters removeObjectForKey:key];
     return dic;
 }
 
