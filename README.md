@@ -17,7 +17,7 @@ second
 
 ```objc
 [YJRouter openURL:@"app://first"];															// 将以push的方式打开FirstViewController
-[YJRouter openURL:@"app://first?showtype=present" withObject:@[@"1", @"2"]];											// 将以modal的方式打开FirstViewController, 并传递一个数组对象
+[YJRouter openURL:@"app://first?showtype=present" withObject:@[@"1", @"2"]];                // 将以modal的方式打开FirstViewController, 并传递一个数组对象
 [YJRouter openURL:@"app://second/12/yjrouter?desc=description"];							// 打开SecondViewController,同时传递id,name,desc三个参数
 ```
 
