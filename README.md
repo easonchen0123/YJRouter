@@ -5,11 +5,12 @@
 
 ## <a id="AppDelegate.m"></a>AppDelegate.m
 ```objc
-[YJRouter registerURLPatternWithArray:array];
 [YJRouter sharedInstance].navigationClassName = @"UINavigationController";					// 或者你自己的UINavigationController的子类
 [YJRouter sharedInstance].appPrefixName = @"app";											// 默认为‘app’
 [YJRouter registerURLPattern:@"app://first" forClass:@"FirstViewController"];           	// 将FirstViewController注册为first，对应URL则为app://first
-[YJRouter registerURLPattern:@"app://second/:id/:name" forClass:@"FirstViewController"];	// 将SecondViewController注册为second，对应URL则为app://second
+[YJRouter registerURLPattern:@"app://second/:id/:name" forClass:@"FirstViewController"];	// 将SecondViewController注册为second，对应URL则为app://
+[YJRouter registerURLPatternWithArray:array];                                               // 可以由一个配置文件生成一个数组，数组中的元素为字典，key为controller和url_pattern
+second
 ```
 
 ## <a id="需要打开新页面的地方"></a>需要打开新页面的地方
