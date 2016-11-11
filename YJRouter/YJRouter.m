@@ -291,7 +291,12 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     }
     
     // 查找NavigationController
-    UINavigationController *navigationController = [self getCurrentNavigationController];
+    UINavigationController *navigationController;
+    if (router.getNavigationControllerBlock) {
+        navigationController = router.getNavigationControllerBlock();
+    } else {
+        navigationController = [self getCurrentNavigationController];
+    }
     if (navigationController == nil) {
         return;
     }

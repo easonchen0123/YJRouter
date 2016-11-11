@@ -21,7 +21,7 @@ extern NSString *const YJRouterParameterObject;
  *  routerParameters 里内置的几个参数会用到上面定义的 string
  */
 typedef void (^MGJRouterHandler)(NSDictionary *routerParameters);
-
+typedef UINavigationController * (^GetNavigationControllerBlock)();
 
 
 
@@ -47,6 +47,12 @@ typedef void (^MGJRouterHandler)(NSDictionary *routerParameters);
  *  present viewcontroller的父controller
  */
 @property (nonatomic, assign) UIViewController *rootViewController;
+/**
+ *  特殊框架下自定义获取NavigationController的Block
+ */
+@property (nonatomic, strong) GetNavigationControllerBlock getNavigationControllerBlock;
+
+
 
 /**
  *  通过数组注册ViewController
