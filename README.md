@@ -1,5 +1,18 @@
 # YJRouter
 
+
+## <a id="常规打开方式"></a>常规打开方式
+```objc
+UIViewController *vc = [[UIViewController alloc] init];
+[self.navigationController pushViewController:vc animated:YES];
+```
+或者
+```objc
+UIViewController *vc = [[UIViewController alloc] init];
+UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+[self presentViewController:nav animated:YES completion:nil];
+```
+
 ## <a id="How to use YJRouter"></a>How to use YJRouter
 * Installation with CocoaPods：`pod 'YJRouter'`
 
@@ -8,7 +21,7 @@
 [YJRouter sharedInstance].navigationClassName = @"UINavigationController";					// 或者你自己的UINavigationController的子类
 [YJRouter sharedInstance].appPrefixName = @"app";											// 默认为‘app’
 [YJRouter registerURLPattern:@"app://first" forClass:@"FirstViewController"];           	// 将FirstViewController注册为first，对应URL则为app://first
-[YJRouter registerURLPattern:@"app://second/:id/:name" forClass:@"FirstViewController"];	// 将SecondViewController注册为second，对应URL则为app://
+[YJRouter registerURLPattern:@"app://second/:id/:name" forClass:@"SecondViewController"];	// 将SecondViewController注册为second，对应URL则为app://
 [YJRouter registerURLPatternWithArray:array];                                               // 可以由一个配置文件生成一个数组，数组中的元素为字典，key为controller和url_pattern
 ```
 
