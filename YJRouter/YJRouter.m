@@ -267,11 +267,15 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 }
 
 + (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo {
+    if (URL == nil) return;
+    
     YJRouter *router = [self sharedInstance];
     
     // 处理解析URL
     URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSArray* pathComponents = [router pathComponentsFromURL:URL];
+    NSArray *pathComponents = [router pathComponentsFromURL:URL];
+    
+    if (pathComponents.count <= 2) return;
     
     // 若不是app本身的URL
     if (![pathComponents[0] isEqualToString:router.appPrefixName]) {
