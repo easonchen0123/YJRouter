@@ -21,7 +21,7 @@ extern NSString *const YJRouterParameterObject;
  *  routerParameters 里内置的几个参数会用到上面定义的 string
  */
 typedef void (^MGJRouterHandler)(NSDictionary *routerParameters);
-typedef UINavigationController * (^GetNavigationControllerBlock)(void);
+typedef UINavigationController *(^GetNavigationControllerBlock)(void);
 
 
 
