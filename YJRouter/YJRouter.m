@@ -272,7 +272,8 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     YJRouter *router = [self sharedInstance];
     
     // 处理解析URL
-    URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    URL = [URL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSArray *pathComponents = [router pathComponentsFromURL:URL];
     
     if (pathComponents.count <= 2) return;
