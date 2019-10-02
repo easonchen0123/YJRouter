@@ -319,10 +319,17 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
         [router.parameters setObject:dic forKey:key];
     }
     
-    NSString *value = parameters[@"showtype"];
-    if (value && [value isEqualToString:@"present"]) {
+    NSString *showtype = parameters[@"showtype"];
+    NSString *modeltype = parameters[@"modeltype"];
+    if (showtype && [showtype isEqualToString:@"present"]) {
         id class2 = NSClassFromString([YJRouter sharedInstance].navigationClassName);
         UIViewController *nav = [[class2 alloc] initWithRootViewController:vc];
+        
+        if (modeltype && [modeltype isEqualToString:@"pagesheet"]) {
+            nav.modalPresentationStyle = UIModalPresentationPageSheet;
+        } else {
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+        }
         
         if ([YJRouter sharedInstance].rootViewController) {
             [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:nil];
