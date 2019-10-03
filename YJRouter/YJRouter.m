@@ -321,12 +321,12 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     }
     
     NSString *showtype = parameters[@"showtype"];
-    NSString *modeltype = parameters[@"modeltype"];
+    NSString *modaltype = parameters[@"modaltype"];
     if (showtype && [showtype isEqualToString:@"present"]) {
         id class2 = NSClassFromString([YJRouter sharedInstance].navigationClassName);
         UIViewController *nav = [[class2 alloc] initWithRootViewController:vc];
         
-        if (modeltype && [modeltype isEqualToString:@"pagesheet"]) {
+        if (modaltype && [modaltype isEqualToString:@"pagesheet"]) {
             nav.modalPresentationStyle = UIModalPresentationPageSheet;
         } else {
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
