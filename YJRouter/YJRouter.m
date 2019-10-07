@@ -255,18 +255,22 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 
 #pragma mark - Public OpenURL
 + (void)openURL:(NSString *)URL {
-    return [self openURL:URL withObject:nil userInfo:nil];
+    return [self openURL:URL withObject:nil userInfo:nil completion:nil];
+}
+
++ (void)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion {
+    return [self openURL:URL withObject:nil userInfo:nil completion:completion];
 }
 
 + (void)openURL:(NSString *)URL withObject:(id)object {
-    return [self openURL:URL withObject:object userInfo:nil];
+    return [self openURL:URL withObject:object userInfo:nil completion:nil];
 }
 
 + (void)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo {
-    return [self openURL:URL withObject:nil userInfo:userInfo];
+    return [self openURL:URL withObject:nil userInfo:userInfo completion:nil];
 }
 
-+ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo {
++ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion {
     if (URL == nil) return;
     
     YJRouter *router = [self sharedInstance];
@@ -333,7 +337,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
         }
         
         if ([YJRouter sharedInstance].rootViewController) {
-            [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:nil];
+            [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:completion];
         }
     } else {
         [navigationController pushViewController:vc animated:YES];

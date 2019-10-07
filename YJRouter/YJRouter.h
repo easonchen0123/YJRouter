@@ -76,6 +76,15 @@ typedef UINavigationController *(^GetNavigationControllerBlock)(void);
  */
 + (void)openURL:(NSString *)URL;
 
+
+/**
+ *  打开一个新页面
+ *
+ *  @param URL                          URL
+ *  @param completion           block
+ */
++ (void)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion;
+
 /**
  *  打开一个新页面
  *
@@ -99,7 +108,7 @@ typedef UINavigationController *(^GetNavigationControllerBlock)(void);
  *  @param object                       参数对象
  *  @param userInfo                     参数字典
  */
-+ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo;
++ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion;
 
 /**
  *  提取参数
