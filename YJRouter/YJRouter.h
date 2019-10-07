@@ -110,7 +110,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param object                       参数对象
  *  @param userInfo                     参数字典
  */
-+ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion;
++ (void)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion;
 
 /**
  *  提取参数
