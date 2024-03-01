@@ -12,6 +12,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString *const YJRouterParameterURL;
 extern NSString *const YJRouterParameterCompletion;
 extern NSString *const YJRouterParameterUserInfo;
@@ -21,7 +23,7 @@ extern NSString *const YJRouterParameterObject;
  *  routerParameters 里内置的几个参数会用到上面定义的 string
  */
 typedef void (^MGJRouterHandler)(NSDictionary *routerParameters);
-typedef UINavigationController * (^GetNavigationControllerBlock)();
+typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void);
 
 
 
@@ -76,6 +78,15 @@ typedef UINavigationController * (^GetNavigationControllerBlock)();
  */
 + (void)openURL:(NSString *)URL;
 
+
+/**
+ *  打开一个新页面
+ *
+ *  @param URL                          URL
+ *  @param completion           block
+ */
++ (void)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion;
+
 /**
  *  打开一个新页面
  *
@@ -99,7 +110,7 @@ typedef UINavigationController * (^GetNavigationControllerBlock)();
  *  @param object                       参数对象
  *  @param userInfo                     参数字典
  */
-+ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo;
++ (void)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion;
 
 /**
  *  提取参数
@@ -110,3 +121,5 @@ typedef UINavigationController * (^GetNavigationControllerBlock)();
 + (id)extractParam:(NSString *)URL;
 
 @end
+
+NS_ASSUME_NONNULL_END

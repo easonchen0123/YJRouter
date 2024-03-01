@@ -50,7 +50,9 @@
         
         NSArray *array = @[@"1", @"2", @"3"];
         NSDictionary *dic = @{ @"userinfo" : @"testUser" };
-        [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic];
+        [YJRouter openURL:@"app://second/200?showtype=present&modeltype=pagesheet" withObject:array userInfo:dic completion:^{
+            int a =0;
+        }];
     }
 }
 

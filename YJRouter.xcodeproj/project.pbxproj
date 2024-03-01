@@ -11,7 +11,6 @@
 		CDED3CE71DC744CF009AAD34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD81DC744CF009AAD34 /* Assets.xcassets */; };
 		CDED3CE81DC744CF009AAD34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD91DC744CF009AAD34 /* LaunchScreen.storyboard */; };
 		CDED3CE91DC744CF009AAD34 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CDC1DC744CF009AAD34 /* FirstViewController.m */; };
-		CDED3CEA1DC744CF009AAD34 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CDD1DC744CF009AAD34 /* Info.plist */; };
 		CDED3CEB1DC744CF009AAD34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CDE1DC744CF009AAD34 /* main.m */; };
 		CDED3CEC1DC744CF009AAD34 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CE01DC744CF009AAD34 /* SecondViewController.m */; };
 		CDED3CED1DC744CF009AAD34 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CE21DC744CF009AAD34 /* ViewController.m */; };
@@ -136,6 +135,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -156,7 +156,6 @@
 			files = (
 				CDED3CE71DC744CF009AAD34 /* Assets.xcassets in Resources */,
 				CDED3CE81DC744CF009AAD34 /* LaunchScreen.storyboard in Resources */,
-				CDED3CEA1DC744CF009AAD34 /* Info.plist in Resources */,
 				CDED3CEF1DC744CF009AAD34 /* YJRouterConfig.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,10 +282,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2F6B3R774Y;
 				INFOPLIST_FILE = "$(SRCROOT)/YJRouterExample/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = easonchen.YJRouter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -296,10 +297,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 2F6B3R774Y;
 				INFOPLIST_FILE = "$(SRCROOT)/YJRouterExample/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0.7;
 				PRODUCT_BUNDLE_IDENTIFIER = easonchen.YJRouter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
