@@ -89,9 +89,29 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     return [pathComponents copy];
 }
 
+// 获取keyWindow
++ (UIWindow*)keyWindow {
+    UIWindow *foundWindow = nil;
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    for (UIWindow *window in windows) {
+        if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+        }
+    }
+    return foundWindow;
+}
+
 // 获取顶层的NavigationController
 + (UINavigationController *)getCurrentNavigationController {
-    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIWindow *keyWindow = nil;
+    if (@available(iOS 13.0, *)) {
+        keyWindow = [YJRouter keyWindow];
+    } else {
+        keyWindow = [UIApplication sharedApplication].keyWindow;
+    }
+    
+    UIViewController *appRootVC = keyWindow.rootViewController;
     UIViewController *topVC = appRootVC;
     while (topVC.presentedViewController) {
         topVC = topVC.presentedViewController;
@@ -115,7 +135,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 + (UIViewController *)getCurrentVC {
     UIViewController *result = nil;
     
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *window = [YJRouter keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
         for(UIWindow *tmpWin in windows) {
@@ -286,7 +306,11 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     if (![pathComponents[0] isEqualToString:router.appPrefixName]) {
         NSURL *url = [NSURL URLWithString:URL];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                [[UIApplication sharedApplication] openURL:url];
+            }
             return;
         }
     }
