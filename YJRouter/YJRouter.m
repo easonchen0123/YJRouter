@@ -18,9 +18,10 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 
 @interface YJRouter ()
 
-@property (nonatomic, strong) NSMutableDictionary *routes;          // url pattern
-@property (nonatomic, strong) NSMutableDictionary *classes;         // url:class
-@property (nonatomic, strong) NSMutableDictionary *parameters;      // 传递参数
+@property (nonatomic, strong) NSMutableDictionary *routes;                                          // url pattern
+@property (nonatomic, strong) NSMutableDictionary *classes;                                         // url:class
+@property (nonatomic, strong) NSMutableDictionary *parameters;                                      // 传递参数
+@property (nonatomic, strong) id<UIViewControllerTransitioningDelegate> presentationController;     // 过场动画控制器
 
 @end
 
@@ -350,18 +351,34 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     
     NSString *showtype = parameters[@"showtype"];
     NSString *modaltype = parameters[@"modaltype"];
+    NSString *presentationClassName = parameters[@"presentationClass"];
     if (showtype && [showtype isEqualToString:@"present"]) {
-        id class2 = NSClassFromString([YJRouter sharedInstance].navigationClassName);
-        UIViewController *nav = [[class2 alloc] initWithRootViewController:vc];
+        id navigationClass = NSClassFromString([YJRouter sharedInstance].navigationClassName);
+        UIViewController *nav = [[navigationClass alloc] initWithRootViewController:vc];
         
         if (modaltype && [modaltype isEqualToString:@"pagesheet"]) {
             nav.modalPresentationStyle = UIModalPresentationPageSheet;
+        } else if (modaltype && [modaltype isEqualToString:@"custom"]) {
+            nav.modalPresentationStyle = UIModalPresentationCustom;
+            if (presentationClassName != nil) {
+                id presentationClass = NSClassFromString(presentationClassName);
+                if (presentationClass != nil) {
+                    id<UIViewControllerTransitioningDelegate> transitioningController = (id<UIViewControllerTransitioningDelegate>) [[presentationClass alloc] initWithPresentedViewController:nav presentingViewController:[YJRouter sharedInstance].rootViewController];
+                    nav.transitioningDelegate = transitioningController;
+                    [YJRouter sharedInstance].presentationController = transitioningController;
+                }
+            }
         } else {
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         
         if ([YJRouter sharedInstance].rootViewController) {
-            [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:completion];
+            [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:^{
+                [YJRouter sharedInstance].presentationController = nil;
+                if (completion) {
+                    completion();
+                }
+            }];
         }
     } else {
         [navigationController pushViewController:vc animated:YES];
