@@ -9,5 +9,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/easonchen0123/YJRouter.git", :tag => "v" + s.version.to_s }
   s.requires_arc = true
   s.source_files = "YJRouter/*.{h,m}"
-  s.ios.deployment_target = "9.0"
+  s.ios.deployment_target = "12.0"
 end
