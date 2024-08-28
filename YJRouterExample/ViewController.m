@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import "YJRouter.h"
+#import "TestViewController.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) UIButton *firstButton;
 @property (nonatomic, strong) UIButton *secondButton;
+@property (nonatomic, strong) UIButton *thirdButton;
 
 @end
 
@@ -33,6 +35,12 @@
     [_secondButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_secondButton];
     
+    _thirdButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_thirdButton setTitle:@"third" forState:UIControlStateNormal];
+    [_thirdButton setFrame:CGRectMake(100, 300, 100, 30)];
+    [_thirdButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_thirdButton];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
@@ -50,7 +58,17 @@
         
         NSArray *array = @[@"1", @"2", @"3"];
         NSDictionary *dic = @{ @"userinfo" : @"testUser" };
-        [YJRouter openURL:@"app://second/200?showtype=present&modeltype=pagesheet" withObject:array userInfo:dic completion:^{
+        [YJRouter openURL:@"app://second/200?showtype=present&modaltype=pagesheet" withObject:array userInfo:dic completion:^{
+            int a =0;
+        }];
+    } else if (sender == self.thirdButton) {
+        
+        NSArray *array = @[@"1", @"2", @"3"];
+        NSDictionary *dic = @{ @"userinfo" : @"testUser" };
+        
+        
+        
+        [YJRouter openURL:@"app://second/200?showtype=present&modaltype=custom&presentationClass=TestViewController" withObject:array userInfo:dic completion:^{
             int a =0;
         }];
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AB9D0272C7F1DED00941BBE /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB9D0252C7F1DED00941BBE /* TestViewController.m */; };
 		CDED3CE61DC744CF009AAD34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDED3CD71DC744CF009AAD34 /* AppDelegate.m */; };
 		CDED3CE71DC744CF009AAD34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD81DC744CF009AAD34 /* Assets.xcassets */; };
 		CDED3CE81DC744CF009AAD34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDED3CD91DC744CF009AAD34 /* LaunchScreen.storyboard */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AB9D0252C7F1DED00941BBE /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		0AB9D0262C7F1DED00941BBE /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		CD3B7CA31DC73283005CC537 /* YJRouter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJRouter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDED3CD61DC744CF009AAD34 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CDED3CD71DC744CF009AAD34 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 				CDED3CDC1DC744CF009AAD34 /* FirstViewController.m */,
 				CDED3CDF1DC744CF009AAD34 /* SecondViewController.h */,
 				CDED3CE01DC744CF009AAD34 /* SecondViewController.m */,
+				0AB9D0262C7F1DED00941BBE /* TestViewController.h */,
+				0AB9D0252C7F1DED00941BBE /* TestViewController.m */,
 				CDED3CE51DC744CF009AAD34 /* YJRouterConfig.geojson */,
 			);
 			path = YJRouterExample;
@@ -169,6 +174,7 @@
 			files = (
 				CDED3CEC1DC744CF009AAD34 /* SecondViewController.m in Sources */,
 				CDED3CF31DC74530009AAD34 /* YJRouter.m in Sources */,
+				0AB9D0272C7F1DED00941BBE /* TestViewController.m in Sources */,
 				CDED3CE61DC744CF009AAD34 /* AppDelegate.m in Sources */,
 				CDED3CEB1DC744CF009AAD34 /* main.m in Sources */,
 				CDED3CE91DC744CF009AAD34 /* FirstViewController.m in Sources */,
