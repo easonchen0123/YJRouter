@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "YJRouter.h"
 #import "TestViewController.h"
+#import "SecondViewController.h"
 
 @interface ViewController ()
 
@@ -58,9 +59,13 @@
         
         NSArray *array = @[@"1", @"2", @"3"];
         NSDictionary *dic = @{ @"userinfo" : @"testUser" };
-        [YJRouter openURL:@"app://second/200?showtype=present&modaltype=pagesheet" withObject:array userInfo:dic completion:^{
+        [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic completion:^{
             int a =0;
         }];
+//        SecondViewController *vc = [[SecondViewController alloc] init];
+//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//        nav.modalPresentationStyle = UIModalPresentationFullScreen;
+//        [self presentViewController:nav animated:YES completion:nil];
     } else if (sender == self.thirdButton) {
         
         NSArray *array = @[@"1", @"2", @"3"];
