@@ -147,15 +147,40 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
         }
     }
     
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
+    id nextResponder = window.rootViewController;
+    if ([nextResponder isKindOfClass:[UITabBarController class]]){
+        UITabBarController *tabbar = (UITabBarController *)nextResponder;
+        UINavigationController *nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
+        result = nav.childViewControllers.lastObject;
+    }
     
-    if ([nextResponder isKindOfClass:[UIViewController class]])
-        result = nextResponder;
-    else
-        result = window.rootViewController;
-    
+    result = [self getTopViewController:nextResponder level:1];
     return result;
+}
+
++ (UIViewController *)getTopViewController:(id)nextResponder level:(NSInteger)level {
+//    NSLog(@"level %ld begin", level);
+    id result = nil;
+    if ([nextResponder isKindOfClass:[UINavigationController class]]) {
+        UIViewController *nav = (UIViewController *)nextResponder;
+        result = nav.childViewControllers.lastObject;
+    } else {
+        result = nextResponder;
+    }
+    if ([result isKindOfClass:[UIViewController class]]) {
+        UIViewController *vc = (UIViewController *)result;
+        
+        if ([vc presentedViewController]) {
+            id newResponder = [self getTopViewController:[vc presentedViewController] level:level + 1];
+//            NSLog(@"level %ld A end", level);
+            return newResponder != nil ? newResponder : result;
+        } else {
+//            NSLog(@"level %ld B end", level);
+            return vc;
+        }
+    }
+//    NSLog(@"level %ld end nil", level);
+    return nil;
 }
 
 - (NSMutableDictionary *)addURLPattern:(NSString *)URLPattern {
@@ -297,7 +322,6 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     YJRouter *router = [self sharedInstance];
     
     // 处理解析URL
-//    URL = [URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     URL = [URL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSArray *pathComponents = [router pathComponentsFromURL:URL];
     
@@ -368,8 +392,9 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         
-        if ([YJRouter sharedInstance].rootViewController) {
-            [[YJRouter sharedInstance].rootViewController presentViewController:nav animated:YES completion:^{
+        UIViewController *topVc = [YJRouter getCurrentVC];
+        if (topVc) {
+            [topVc presentViewController:nav animated:YES completion:^{
                 [YJRouter sharedInstance].presentationController = nil;
                 if (completion) {
                     completion();
