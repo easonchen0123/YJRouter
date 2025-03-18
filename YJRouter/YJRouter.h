@@ -76,7 +76,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *
  *  @param URL                          URL
  */
-+ (void)openURL:(NSString *)URL;
++ (UIViewController *)openURL:(NSString *)URL;
 
 
 /**
@@ -85,7 +85,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param URL                          URL
  *  @param completion           block
  */
-+ (void)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion;
++ (UIViewController *)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion;
 
 /**
  *  打开一个新页面
@@ -93,7 +93,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param URL                          URL
  *  @param object                       参数对象
  */
-+ (void)openURL:(NSString *)URL withObject:(id)object;
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object;
 
 /**
  *  打开一个新页面
@@ -101,7 +101,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param URL                          URL
  *  @param userInfo                     参数字典
  */
-+ (void)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo;
++ (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo;
 
 /**
  *  打开一个新页面
@@ -110,7 +110,7 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param object                       参数对象
  *  @param userInfo                     参数字典
  */
-+ (void)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion;
++ (UIViewController *)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion;
 
 /**
  *  提取参数

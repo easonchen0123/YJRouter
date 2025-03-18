@@ -300,24 +300,24 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 }
 
 #pragma mark - Public OpenURL
-+ (void)openURL:(NSString *)URL {
++ (UIViewController *)openURL:(NSString *)URL {
     return [self openURL:URL withObject:nil userInfo:nil completion:nil];
 }
 
-+ (void)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion {
++ (UIViewController *)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion {
     return [self openURL:URL withObject:nil userInfo:nil completion:completion];
 }
 
-+ (void)openURL:(NSString *)URL withObject:(id)object {
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object {
     return [self openURL:URL withObject:object userInfo:nil completion:nil];
 }
 
-+ (void)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo {
++ (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo {
     return [self openURL:URL withObject:nil userInfo:userInfo completion:nil];
 }
 
-+ (void)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion {
-    if (URL == nil) return;
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion {
+    if (URL == nil) return nil;
     
     YJRouter *router = [self sharedInstance];
     
@@ -325,14 +325,14 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     URL = [URL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSArray *pathComponents = [router pathComponentsFromURL:URL];
     
-    if (pathComponents.count <= 2) return;
+    if (pathComponents.count <= 2) return nil;
     
     // 若不是app本身的URL
     if (![pathComponents[0] isEqualToString:router.appPrefixName]) {
         NSURL *url = [NSURL URLWithString:URL];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
             [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-            return;
+            return nil;
         }
     }
     
@@ -341,7 +341,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     NSString *className = [router.classes objectForKey:key];
     id class = NSClassFromString(className);
     if (class == nil) {
-        return;
+        return nil;
     }
     
     // 查找NavigationController
@@ -350,7 +350,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
         navigationController = router.getNavigationControllerBlock();
     }
     if (navigationController == nil) {
-        return;
+        return nil;
     }
     
     // 创建ViewController
@@ -401,8 +401,10 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
                 }
             }];
         }
+        return nav;
     } else {
         [navigationController pushViewController:vc animated:YES];
+        return vc;
     }
 }
 

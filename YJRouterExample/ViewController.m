@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UIButton *firstButton;
 @property (nonatomic, strong) UIButton *secondButton;
 @property (nonatomic, strong) UIButton *thirdButton;
+@property (nonatomic, strong) UIButton *forthButton;
+
+@property (nonatomic, strong) UINavigationController *nav;
 
 @end
 
@@ -42,6 +45,12 @@
     [_thirdButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_thirdButton];
     
+    _forthButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_forthButton setTitle:@"forth" forState:UIControlStateNormal];
+    [_forthButton setFrame:CGRectMake(100, 400, 100, 30)];
+    [_forthButton addTarget:self action:@selector(onTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_forthButton];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
@@ -59,7 +68,7 @@
         
         NSArray *array = @[@"1", @"2", @"3"];
         NSDictionary *dic = @{ @"userinfo" : @"testUser" };
-        [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic completion:^{
+        self.nav = [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic completion:^{
             int a =0;
         }];
 //        SecondViewController *vc = [[SecondViewController alloc] init];
@@ -75,6 +84,11 @@
         
         [YJRouter openURL:@"app://second/200?showtype=present&modaltype=custom&presentationClass=TestViewController" withObject:array userInfo:dic completion:^{
             int a =0;
+        }];
+    } else if (sender == self.forthButton) {
+        
+        [self.nav dismissViewControllerAnimated:YES completion:^{
+            self.nav = nil;
         }];
     }
 }

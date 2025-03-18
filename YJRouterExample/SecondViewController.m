@@ -19,6 +19,10 @@
 
 @implementation SecondViewController
 
+- (void)dealloc {
+    NSLog(@"dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
