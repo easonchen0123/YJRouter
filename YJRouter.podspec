@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "YJRouter"
-  s.version      = "1.0.9"
+  s.version      = "1.1.0"
   s.summary      = "app new page router"
   s.description  = "可以通过url的形式打开新页面,简化打开新的ViewController的代码，可以在配置文件中注册url和对应的ViewController类，同时支持打电话，发邮件等系统级url"
   s.homepage     = "https://github.com/easonchen0123/YJRouter"
