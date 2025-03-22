@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) UINavigationController *nav;
 
+
 @end
 
 @implementation ViewController
@@ -69,6 +70,7 @@
         NSArray *array = @[@"1", @"2", @"3"];
         NSDictionary *dic = @{ @"userinfo" : @"testUser" };
         self.nav = [YJRouter openURL:@"app://second/200?showtype=present" withObject:array userInfo:dic completion:^{
+
             int a =0;
         }];
 //        SecondViewController *vc = [[SecondViewController alloc] init];
