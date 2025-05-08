@@ -99,6 +99,14 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  打开一个新页面
  *
  *  @param URL                          URL
+ *  @param presentingViewController                       参数对象
+ */
++ (UIViewController *)openURL:(NSString *)URL presentingViewController:(UIViewController *)presentingViewController;
+
+/**
+ *  打开一个新页面
+ *
+ *  @param URL                          URL
  *  @param userInfo                     参数字典
  */
 + (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo;
@@ -111,6 +119,15 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  @param userInfo                     参数字典
  */
 + (UIViewController *)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion;
+
+/**
+ *  打开一个新页面
+ *
+ *  @param URL                          URL
+ *  @param object                       参数对象
+ *  @param userInfo                     参数字典
+ */
++ (UIViewController *)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo presentingViewController:(UIViewController * _Nullable)presentingViewController completion:(void (^ __nullable)(void))completion;
 
 /**
  *  提取参数

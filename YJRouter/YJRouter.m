@@ -152,9 +152,9 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
         UITabBarController *tabbar = (UITabBarController *)nextResponder;
         UINavigationController *nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
         result = nav.childViewControllers.lastObject;
+    } else {
+        result = [self getTopViewController:nextResponder level:1];
     }
-    
-    result = [self getTopViewController:nextResponder level:1];
     return result;
 }
 
@@ -301,22 +301,30 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 
 #pragma mark - Public OpenURL
 + (UIViewController *)openURL:(NSString *)URL {
-    return [self openURL:URL withObject:nil userInfo:nil completion:nil];
+    return [self openURL:URL withObject:nil userInfo:nil presentingViewController:nil completion:nil];
 }
 
 + (UIViewController *)openURL:(NSString *)URL completion:(void (^ __nullable)(void))completion {
-    return [self openURL:URL withObject:nil userInfo:nil completion:completion];
+    return [self openURL:URL withObject:nil userInfo:nil presentingViewController:nil completion:completion];
 }
 
 + (UIViewController *)openURL:(NSString *)URL withObject:(id)object {
-    return [self openURL:URL withObject:object userInfo:nil completion:nil];
+    return [self openURL:URL withObject:object userInfo:nil presentingViewController:nil completion:nil];
+}
+
++ (UIViewController *)openURL:(NSString *)URL presentingViewController:(UIViewController *)presentingViewController; {
+    return [self openURL:URL withObject:nil userInfo:nil presentingViewController:presentingViewController completion:nil];
 }
 
 + (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo {
-    return [self openURL:URL withObject:nil userInfo:userInfo completion:nil];
+    return [self openURL:URL withObject:nil userInfo:userInfo presentingViewController:nil completion:nil];
 }
 
-+ (UIViewController *)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo completion:(void (^ __nullable)(void))completion {
++ (UIViewController *)openURL:(NSString *)URL withObject:(id _Nullable)object userInfo:(NSDictionary * _Nullable)userInfo completion:(void (^ __nullable)(void))completion {
+    return [self openURL:URL withObject:object userInfo:userInfo presentingViewController:nil completion:completion];
+}
+
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object userInfo:(NSDictionary *)userInfo presentingViewController:(UIViewController * _Nullable)presentingViewController  completion:(void (^ __nullable)(void))completion {
     if (URL == nil) return nil;
     
     YJRouter *router = [self sharedInstance];
@@ -392,14 +400,23 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
             nav.modalPresentationStyle = UIModalPresentationFullScreen;
         }
         
-        UIViewController *topVc = [YJRouter getCurrentVC];
-        if (topVc) {
-            [topVc presentViewController:nav animated:YES completion:^{
+        if (presentingViewController) {
+            [presentingViewController presentViewController:nav animated:YES completion:^{
                 [YJRouter sharedInstance].presentationController = nil;
                 if (completion) {
                     completion();
                 }
             }];
+        } else {
+            UIViewController *topVc = [YJRouter getCurrentVC];
+            if (topVc) {
+                [topVc presentViewController:nav animated:YES completion:^{
+                    [YJRouter sharedInstance].presentationController = nil;
+                    if (completion) {
+                        completion();
+                    }
+                }];
+            }
         }
         return nav;
     } else {
