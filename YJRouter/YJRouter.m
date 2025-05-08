@@ -316,6 +316,10 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     return [self openURL:URL withObject:nil userInfo:nil presentingViewController:presentingViewController completion:nil];
 }
 
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object presentingViewController:(UIViewController *)presentingViewController {
+    return [self openURL:URL withObject:object userInfo:nil presentingViewController:presentingViewController completion:nil];
+}
+
 + (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo {
     return [self openURL:URL withObject:nil userInfo:userInfo presentingViewController:nil completion:nil];
 }

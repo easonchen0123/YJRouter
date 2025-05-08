@@ -107,6 +107,14 @@ typedef UINavigationController * _Nullable (^GetNavigationControllerBlock)(void)
  *  打开一个新页面
  *
  *  @param URL                          URL
+ *  @param presentingViewController                       参数对象
+ */
++ (UIViewController *)openURL:(NSString *)URL withObject:(id)object presentingViewController:(UIViewController *)presentingViewController;
+
+/**
+ *  打开一个新页面
+ *
+ *  @param URL                          URL
  *  @param userInfo                     参数字典
  */
 + (UIViewController *)openURL:(NSString *)URL withUserInfo:(NSDictionary *)userInfo;
