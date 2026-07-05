@@ -139,6 +139,7 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
     UIWindow *topWin = [YJRouter keyWindow];
     if (topWin.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
+        topWin = nil;
         for (UIWindow *tmpWin in windows) {
             if (tmpWin.windowLevel >= 10) continue;
             if (topWin == nil || tmpWin.windowLevel > topWin.windowLevel) {
