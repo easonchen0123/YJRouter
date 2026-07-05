@@ -136,18 +136,18 @@ NSString *const YJRouterParameterObject = @"YJRouterParameterObject";
 + (UIViewController *)getCurrentVC {
     UIViewController *result = nil;
     
-    UIWindow *window = [YJRouter keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal) {
+    UIWindow *topWin = [YJRouter keyWindow];
+    if (topWin.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow *tmpWin in windows) {
-            if (tmpWin.windowLevel == UIWindowLevelNormal) {
-                window = tmpWin;
-                break;
+        for (UIWindow *tmpWin in windows) {
+            if (tmpWin.windowLevel >= 10) continue;
+            if (topWin == nil || tmpWin.windowLevel > topWin.windowLevel) {
+                topWin = tmpWin;
             }
         }
     }
     
-    id nextResponder = window.rootViewController;
+    id nextResponder = topWin.rootViewController;
     if ([nextResponder isKindOfClass:[UITabBarController class]]){
         UITabBarController *tabbar = (UITabBarController *)nextResponder;
         UINavigationController *nav = (UINavigationController *)tabbar.viewControllers[tabbar.selectedIndex];
